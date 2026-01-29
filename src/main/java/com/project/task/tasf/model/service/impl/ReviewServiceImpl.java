@@ -3,16 +3,16 @@ package com.project.task.tasf.model.service.impl;
 import com.project.task.tasf.model.dao.ReviewDao;
 import com.project.task.tasf.model.entity.Review;
 import com.project.task.tasf.model.service.ReviewService;
-import com.project.task.tasf.model.validator.impl.ReviewValidator;
+import com.project.task.tasf.model.validator.ValidationHandler;
 
 import java.util.List;
 
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewDao reviewDao;
-    private final ReviewValidator validator;
+    private final ValidationHandler<Review> validator;
 
-    public ReviewServiceImpl(ReviewDao reviewDao, ReviewValidator validator) {
+    public ReviewServiceImpl(ReviewDao reviewDao, ValidationHandler<Review> validator) {
         this.reviewDao = reviewDao;
         this.validator = validator;
     }
@@ -33,4 +33,3 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewDao.save(review);
     }
 }
-

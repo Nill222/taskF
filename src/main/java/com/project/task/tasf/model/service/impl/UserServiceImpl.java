@@ -4,15 +4,14 @@ import com.project.task.tasf.model.dao.UserDao;
 import com.project.task.tasf.model.entity.User;
 import com.project.task.tasf.model.entity.UserRole;
 import com.project.task.tasf.model.service.UserService;
-import com.project.task.tasf.model.validator.impl.UserValidator;
+import com.project.task.tasf.model.validator.ValidationHandler;
 import com.project.task.tasf.util.PasswordHash;
-import lombok.Getter;
 
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final UserValidator validator;
+    private final ValidationHandler<User> validator;
 
-    public UserServiceImpl(UserDao userDao, UserValidator validator) {
+    public UserServiceImpl(UserDao userDao, ValidationHandler<User> validator) {
         this.userDao = userDao;
         this.validator = validator;
     }
@@ -63,4 +62,3 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }
-

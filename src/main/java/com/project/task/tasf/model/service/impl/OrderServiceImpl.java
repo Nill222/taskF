@@ -5,16 +5,16 @@ import com.project.task.tasf.model.dao.OrderDao;
 import com.project.task.tasf.model.entity.Order;
 import com.project.task.tasf.model.entity.OrderType;
 import com.project.task.tasf.model.service.OrderService;
-import com.project.task.tasf.model.validator.impl.OrderValidator;
+import com.project.task.tasf.model.validator.ValidationHandler;
 
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
     private final OrderDao orderDao;
-    private final OrderValidator validator;
+    private final ValidationHandler<Order> validator;
 
-    public OrderServiceImpl(OrderDao orderDao, OrderValidator validator) {
+    public OrderServiceImpl(OrderDao orderDao, ValidationHandler<Order> validator) {
         this.orderDao = orderDao;
         this.validator = validator;
     }

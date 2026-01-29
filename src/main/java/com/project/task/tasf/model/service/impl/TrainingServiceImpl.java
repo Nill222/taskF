@@ -6,17 +6,17 @@ import com.project.task.tasf.model.entity.Order;
 import com.project.task.tasf.model.entity.OrderType;
 import com.project.task.tasf.model.entity.Training;
 import com.project.task.tasf.model.service.TrainingService;
-import com.project.task.tasf.model.validator.impl.TrainingValidator;
+import com.project.task.tasf.model.validator.ValidationHandler;
 
 import java.util.List;
 
 public class TrainingServiceImpl implements TrainingService {
 
     private final TrainingDao trainingDao;
-    private final TrainingValidator validator;
+    private final ValidationHandler<Training> validator;
     private final OrderDao orderDao;
 
-    public TrainingServiceImpl(TrainingDao trainingDao, TrainingValidator validator, OrderDao orderDao) {
+    public TrainingServiceImpl(TrainingDao trainingDao, ValidationHandler<Training> validator, OrderDao orderDao) {
         this.trainingDao = trainingDao;
         this.validator = validator;
         this.orderDao = orderDao;
@@ -61,4 +61,3 @@ public class TrainingServiceImpl implements TrainingService {
         orderDao.update(order);
     }
 }
-

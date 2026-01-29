@@ -8,6 +8,10 @@ import com.project.task.tasf.model.dao.impl.OrderDaoImpl;
 import com.project.task.tasf.model.dao.impl.ReviewDaoImpl;
 import com.project.task.tasf.model.dao.impl.TrainingDaoImpl;
 import com.project.task.tasf.model.dao.impl.UserDaoImpl;
+import com.project.task.tasf.model.entity.Order;
+import com.project.task.tasf.model.entity.Review;
+import com.project.task.tasf.model.entity.Training;
+import com.project.task.tasf.model.entity.User;
 import com.project.task.tasf.model.service.OrderService;
 import com.project.task.tasf.model.service.ReviewService;
 import com.project.task.tasf.model.service.TrainingService;
@@ -16,10 +20,11 @@ import com.project.task.tasf.model.service.impl.OrderServiceImpl;
 import com.project.task.tasf.model.service.impl.ReviewServiceImpl;
 import com.project.task.tasf.model.service.impl.TrainingServiceImpl;
 import com.project.task.tasf.model.service.impl.UserServiceImpl;
-import com.project.task.tasf.model.validator.impl.OrderValidator;
-import com.project.task.tasf.model.validator.impl.ReviewValidator;
-import com.project.task.tasf.model.validator.impl.TrainingValidator;
-import com.project.task.tasf.model.validator.impl.UserValidator;
+import com.project.task.tasf.model.validator.ValidationHandler;
+import com.project.task.tasf.model.validator.impl.order.OrderValidationChain;
+import com.project.task.tasf.model.validator.impl.review.ReviewValidationChain;
+import com.project.task.tasf.model.validator.impl.training.TrainingValidationChain;
+import com.project.task.tasf.model.validator.impl.user.UserValidationChain;
 import lombok.Getter;
 
 @Getter
@@ -37,10 +42,11 @@ public class ServiceFactory {
         OrderDao orderDao = new OrderDaoImpl();
         TrainingDao trainingDao = new TrainingDaoImpl();
         ReviewDao reviewDao = new ReviewDaoImpl();
-        UserValidator userValidator = new UserValidator();
-        OrderValidator orderValidator = new OrderValidator(userDao);
-        TrainingValidator trainingValidator = new TrainingValidator();
-        ReviewValidator reviewValidator = new ReviewValidator();
+        ValidationHandler<User> userValidator = UserValidationChain.build();
+        ValidationHandler<Order> orderValidator = OrderValidationChain.build(userDao);
+        ValidationHandler<Training> trainingValidator = TrainingValidationChain.build();
+        ValidationHandler<Review> reviewValidator = ReviewValidationChain.build();
+
         this.userService = new UserServiceImpl(userDao, userValidator);
         this.orderService = new OrderServiceImpl(orderDao, orderValidator);
         this.trainingService = new TrainingServiceImpl(trainingDao, trainingValidator, orderDao);
