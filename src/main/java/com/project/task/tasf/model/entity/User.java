@@ -1,11 +1,11 @@
 package com.project.task.tasf.model.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Builder
 public class User extends BaseEntity {
     private String name;
     private String passwordHash;

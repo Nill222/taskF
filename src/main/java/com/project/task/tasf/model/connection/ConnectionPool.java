@@ -101,9 +101,9 @@ public enum ConnectionPool {
         } catch (InterruptedException e) {
             logger.error("Error getting connection", e);
             Thread.currentThread().interrupt();
-            throw new RuntimeException("Thread interrupted while getting connection");
+            throw new ExceptionInInitializerError("Thread interrupted while getting connection");
         } catch (SQLException e) {
-            throw new RuntimeException("Connection validation failed", e);
+            throw new ExceptionInInitializerError();
         }
     }
 

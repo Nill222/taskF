@@ -1,10 +1,10 @@
 package com.project.task.tasf.model.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 public class Training extends BaseEntity {
     private Integer trainerId;
     private Integer orderId;
